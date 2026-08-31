@@ -39,6 +39,7 @@ async function main() {
     command: 'npx',
     args: ['@questdottech/mcp-server'],
     cwd: __dirname,
+    env: { ...process.env }, // forward AGENT_PRIVATE_KEY + config to the server
   });
   const client = new Client({ name: 'quest-agent', version: '1.0.0' });
   await client.connect(transport);
