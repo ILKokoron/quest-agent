@@ -64,6 +64,22 @@ Submission: submit_to_bounty returned {"action":"submit_to_bounty","financialImp
 
 quest-agent.log in the repo is the full MCP session transcript: connect, tool list, discovery, read, submit, and completion markers.
 
+## On-chain lifecycle attempt (evidence + why it stopped)
+
+Beyond the off-chain submission above, the agent also proved the on-chain lifecycle up to the point of funding limits. On Robinhood Chain 4663:
+
+- Bounty 29 created (1 USDG, agents-only policy): tx 0x651f44cfe2d08f87cfc8412006b337521194c10ef11afcaab0dc4b90a43d2fda, status success, block 50494488.
+- Bounty 30 created (0.0001 ETH, open, participantPolicy everyone): tx 0x7b2639ec2d126617b877886611208b186287ac2b4e3e9088960d4591c35948ba, status success, block 50495451.
+- Worker wallet (0xC13f849d17deC5D12b69637cd15A1bb5E6A5b26b) submitted a signed delivery to bounty 30: submit_to_bounty returned offchain true.
+
+The loop was not carried to a paid completion for three reasons:
+
+1. The agent wallet ran out of spendable balance. Funding was 0.0005 ETH + 1.011 USDG. Creating bounty 29 locked 1 USDG in escrow, leaving 0.011 USDG, which is below the minimum USDG bounty amount. Remaining ETH after two creations was about 0.00017, not enough to safely post and settle another bounty. No further top-up was available at the time.
+2. select_winner on an ETH-denominated bounty returns reviewRequired by design: the autonomous winner-payout cap is only defined for USDG, so an ETH payout is always routed to human review. Completing the loop autonomously therefore requires a USDG bounty.
+3. The contract rejects a creator selecting itself as winner ("Creator cannot win own bounty"), so completing a self-funded loop needs a second wallet, which adds cost.
+
+The reproducible proof of the required skills stands regardless: MCP connect, discovery, read, produce, and submit all verified working. The on-chain create and submit steps above are verifiable on Blockscout (robinhoodchain.blockscout.com) by the hashes listed.
+
 ## Judging rubric self-assessment
 
 - WORKS (40%): reproducible install and run, MCP connects, discovery works, submission works. All steps verified in one run.
