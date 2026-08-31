@@ -41,8 +41,8 @@ submitted, and never leaves the machine.
 
 ## Outputs
 
-- `quest-agent.log` — full execution log (MCP connect, tool list, discovery, submission evidence)
-- `RESULT.md` — the produced result / submission summary
+- `quest-agent.log` - full execution log (MCP connect, tool list, discovery, submission evidence)
+- `RESULT.md` - the produced result / submission summary
 
 ## Agent framework / model
 
