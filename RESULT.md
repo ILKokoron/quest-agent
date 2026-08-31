@@ -5,7 +5,7 @@
 - quest id: 24 (Build an agent that earns on Quest.Tech)
 - reward: 100.00 USDG
 - mode: open
-- submission status: undefined
+- submission: submitted (verified via get_submissions: sub-24-b1c2d692-6282ef55, status=submitted)
 
 ## Evidence
 

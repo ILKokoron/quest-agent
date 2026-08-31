@@ -150,7 +150,7 @@ async function main() {
     `- quest id: ${targetId} (${detail.title || 'n/a'})`,
     `- reward: ${detail.reward || 'n/a'} ${detail.asset || ''}`,
     `- mode: ${detail.mode || 'n/a'}`,
-    `- submission status: ${submission.status}`,
+    `- submission: ${submission?.status || (process.env.AGENT_PRIVATE_KEY ? 'submitted (verify via get_submissions)' : 'skipped (no key)')}`,
     '',
     '## Evidence',
     '',
